@@ -2,16 +2,40 @@ import { use } from "react";
 
 const Users = ({ usersdata }) => {
   const users = use(usersdata);
-  console.log(users);
+  //   console.log(users);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // console.log("form btn click");
+
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    console.log(name, email);
+
+    const newUser = {
+      name,
+      email,
+    };
+
+    fetch("http://localhost:2000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("after form submitted", data));
+  };
 
   return (
     <div>
       <div className="">
         <h3>add a new user</h3>
-        <form action="">
-          <input type="text" name="" id="" />
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="name" id="" />
           <br />
-          <input type="email" name="" id="" />
+          <input type="email" name="email" id="" />
           <br />
           <button>user add</button>
         </form>

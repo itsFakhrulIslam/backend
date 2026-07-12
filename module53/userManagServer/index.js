@@ -1,10 +1,12 @@
 const express = require("express");
-const cors = require('cors')
+const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 2000;
 
-app.use(cors())
+// middleware area
+app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("hello backend world, user management server coocking...");
@@ -30,6 +32,14 @@ const users = [
 
 app.get("/users", (req, res) => {
   res.send(users);
+});
+
+app.post("/users", (req, res) => {
+  console.log("form submitted");
+
+  // store the user
+  const newUser = req.body;
+  console.log(newUser);
 });
 
 app.listen(port, () => {
