@@ -40,6 +40,10 @@ app.post("/users", (req, res) => {
   // store the user
   const newUser = req.body;
   console.log(newUser);
+
+  newUser.id = users.length + 1;
+  users.push(newUser);
+  res.send(newUser);
 });
 
 app.listen(port, () => {

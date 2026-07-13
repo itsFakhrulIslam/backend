@@ -1,8 +1,10 @@
-import { use } from "react";
+import { use, useState } from "react";
 
 const Users = ({ usersdata }) => {
-  const users = use(usersdata);
+  const initialUsers = use(usersdata);
   //   console.log(users);
+
+  const [users, setUsers] = useState(initialUsers);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +27,12 @@ const Users = ({ usersdata }) => {
       body: JSON.stringify(newUser),
     })
       .then((res) => res.json())
-      .then((data) => console.log("after form submitted", data));
+      .then((data) => {
+        console.log("after form submitted", data);
+        const newUsers = [...users, data];
+        setUsers(newUsers);
+        event.target.reset()
+      });
   };
 
   return (
