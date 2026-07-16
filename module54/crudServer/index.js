@@ -32,6 +32,15 @@ app.get("/", (req, res) => {
 async function run() {
   try {
     await client.connect();
+
+    // this area database relateds, and all database apis operation here
+    app.post("/users", (req, res) => {
+      console.log("user saving cocking..");
+
+      const userData = req.body;
+      console.log(userData);
+    });
+
     await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!",
