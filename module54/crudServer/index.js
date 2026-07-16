@@ -2,6 +2,9 @@ const express = require("express");
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
+const dns = require("node:dns").promises;
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
+
 const cors = require("cors");
 
 const app = express();
@@ -11,11 +14,9 @@ const port = process.env.PORT || 2030;
 app.use(cors());
 app.use(express.json());
 
-// mongoDb connector here
-// crudAppDb
-// 9EH6NfUiosqYX5c0
+// s9U6uo7o5zvNSuI4
 const uri =
-  "mongodb+srv://crudAppDb:9EH6NfUiosqYX5c0@crudapp.rsibkyv.mongodb.net/?appName=crudApp";
+  "mongodb+srv://crudAppServer:s9U6uo7o5zvNSuI4@crudapp.rsibkyv.mongodb.net/?appName=crudApp";
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
