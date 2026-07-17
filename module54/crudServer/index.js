@@ -34,8 +34,14 @@ async function run() {
     await client.connect();
 
     // database and collection create here
+
+    // users
     const testUserDB = client.db("testUserDB");
     const testUserCollection = testUserDB.collection("testUsers");
+
+    // products
+    const productsDB = client.db("productsDB");
+    const productsCollection = productsDB.collection("products");
 
     // this area database relateds, and all database apis operation here
     app.post("/users", async (req, res) => {
@@ -47,6 +53,17 @@ async function run() {
       const userResultData = await testUserCollection.insertOne(userData);
       console.log(userResultData);
       res.send(userResultData);
+    });
+
+    // for products area
+    app.post("/products", async (req, res) => {
+      console.log("product saving cocking..");
+
+      const newProduct = req.body;
+      console.log(newProduct);
+
+      const productResult = await productsCollection.insertOne(newProduct);
+      console.log(productResult);
     });
 
     await client.db("admin").command({ ping: 1 });
