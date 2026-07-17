@@ -56,9 +56,6 @@ const Users = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("after save product item", data);
-        if (data.insertedId) {
-          alert("products added successful.");
-        }
       });
   };
 

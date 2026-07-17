@@ -66,6 +66,21 @@ async function run() {
       console.log(productResult);
     });
 
+    // data disply area
+    // for user
+    app.get("/users", async (req, res) => {
+      const getUsers = testUserCollection.find();
+      const userArr = await getUsers.toArray();
+      res.send(userArr);
+    });
+
+    // for products
+    app.get("/products", async (req, res) => {
+      const getProducts = productsCollection.find();
+      const productArr = await getProducts.toArray();
+      res.send(productArr);
+    });
+
     await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!",
