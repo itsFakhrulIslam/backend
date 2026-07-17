@@ -1,5 +1,5 @@
 const Users = () => {
-  const handleForm = (e) => {
+  const handleUserForm = (e) => {
     e.preventDefault();
 
     // get info to input
@@ -22,19 +22,27 @@ const Users = () => {
       body: JSON.stringify(newUser),
     })
       .then((res) => res.json())
-      .then((data) => console.log("after saving user", data));
+      .then((data) => {
+        console.log("after saving user", data);
+        if (data.insertedId) {
+          alert("user added successful.");
+          e.target.reset();
+        }
+      });
   };
 
   return (
-    <div>
-      <form onSubmit={handleForm}>
-        <input type="text" name="name" id="" placeholder="enter name" />
-        <br />
-        <input type="text" name="email" id="" placeholder="enter email" />
-        <br />
-        <input type="submit" value="Add User" />
-      </form>
-    </div>
+    <>
+      <div>
+        <form onSubmit={handleUserForm}>
+          <input type="text" name="name" id="" placeholder="enter name" />
+          <br />
+          <input type="text" name="email" id="" placeholder="enter email" />
+          <br />
+          <input type="submit" value="Add User" />
+        </form>
+      </div>
+    </>
   );
 };
 

@@ -33,12 +33,20 @@ async function run() {
   try {
     await client.connect();
 
+    // database and collection create here
+    const testUserDB = client.db("testUserDB");
+    const testUserCollection = testUserDB.collection("testUsers");
+
     // this area database relateds, and all database apis operation here
-    app.post("/users", (req, res) => {
+    app.post("/users", async (req, res) => {
       console.log("user saving cocking..");
 
       const userData = req.body;
       console.log(userData);
+
+      const userResultData = await testUserCollection.insertOne(userData);
+      console.log(userResultData);
+      res.send(userResultData);
     });
 
     await client.db("admin").command({ ping: 1 });
