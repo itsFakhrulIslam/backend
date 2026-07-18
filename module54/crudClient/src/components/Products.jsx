@@ -33,7 +33,7 @@ const Products = ({ productPromise }) => {
           console.log("after save product item", data);
         }
       });
-      
+
     console.log("last log");
   };
 
@@ -56,7 +56,9 @@ const Products = ({ productPromise }) => {
     console.log("befor fetch");
   };
 
-  console.log("out of the handle console", products.length);
+  const handleDelete = (itemId) => {
+    console.log("clicked", itemId);
+  };
 
   return (
     <>
@@ -74,7 +76,10 @@ const Products = ({ productPromise }) => {
 
       <div>
         {products.map((product) => (
-          <p key={product._id}>{product.name}</p>
+          <p key={product._id}>
+            {product.name}
+            <button onClick={() => handleDelete(product._id)}>x</button>
+          </p>
         ))}
       </div>
     </>

@@ -43,6 +43,9 @@ const Users = ({ userPromise }) => {
       });
   };
 
+  const handleDelete = (itemId) => {
+    console.log("clicked",itemId);
+  };
 
   return (
     <>
@@ -59,7 +62,10 @@ const Users = ({ userPromise }) => {
       {/* show user data in ui */}
       <div className="">
         {users.map((user) => (
-          <p key={user._id}>{user.name}</p>
+          <p key={user._id}>
+            {user.name}
+            <button onClick={()=>handleDelete(user._id)}>x</button>
+          </p>
         ))}
       </div>
     </>
