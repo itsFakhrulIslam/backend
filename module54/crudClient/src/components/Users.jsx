@@ -1,4 +1,12 @@
-const Users = () => {
+import { use, useState } from "react";
+
+const Users = ({ userPromise }) => {
+  // data get area
+  const userData = use(userPromise);
+  console.log(userData);
+
+  const [users, setUsers] = useState(userData);
+
   const handleUserForm = (e) => {
     e.preventDefault();
 
@@ -25,39 +33,16 @@ const Users = () => {
       .then((data) => {
         console.log("after saving user", data);
         if (data.insertedId) {
+          newUser._id = data.insertedId;
+          const newUsers = [...users, newUser];
+          setUsers(newUsers);
+
           alert("user added successful.");
           e.target.reset();
         }
       });
   };
 
-  const handleProductForm = (event) => {
-    event.preventDefault();
-
-    // get products input value
-    const name = event.target.name.value;
-    const color = event.target.color.value;
-    const brand = event.target.brand.value;
-    console.log(name, color, brand);
-
-    const newProduct = {
-      name,
-      color,
-      brand,
-    };
-
-    fetch("http://localhost:2030/products", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newProduct),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("after save product item", data);
-      });
-  };
 
   return (
     <>
@@ -71,16 +56,11 @@ const Users = () => {
         </form>
       </div>
 
-      <div>
-        <form onSubmit={handleProductForm}>
-          <input type="text" name="name" id="" placeholder="enter name" />
-          <br />
-          <input type="text" name="color" id="" placeholder="enter color" />
-          <br />
-          <input type="text" name="brand" id="" placeholder="enter price" />
-          <br />
-          <input type="submit" value="Add Product" />
-        </form>
+      {/* show user data in ui */}
+      <div className="">
+        {users.map((user) => (
+          <p key={user._id}>{user.name}</p>
+        ))}
       </div>
     </>
   );

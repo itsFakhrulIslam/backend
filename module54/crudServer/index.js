@@ -64,6 +64,7 @@ async function run() {
 
       const productResult = await productsCollection.insertOne(newProduct);
       console.log(productResult);
+      res.send(productResult);
     });
 
     // data disply area
