@@ -75,6 +75,19 @@ async function run() {
       res.send(userArr);
     });
 
+    // dynamically user find
+    app.get("/users/:id", async (req, res) => {
+      console.log("user id hitted", req.params.id);
+
+      const userDetailId = req.params.id;
+
+      const query = { _id: new ObjectId(userDetailId) };
+
+      const detailResult = await testUserCollection.findOne(query);
+
+      res.send(detailResult);
+    });
+
     // for products
     app.get("/products", async (req, res) => {
       const getProducts = productsCollection.find();
