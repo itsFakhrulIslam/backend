@@ -58,6 +58,22 @@ const Products = ({ productPromise }) => {
 
   const handleDelete = (itemId) => {
     console.log("clicked", itemId);
+
+    fetch(`http://localhost:2030/products/${itemId}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("after delete products", data);
+
+        if (data.deletedCount) {
+          const reminingProducts = products.filter(
+            (product) => product._id !== itemId,
+          );
+
+          setProducts(reminingProducts);
+        }
+      });
   };
 
   return (

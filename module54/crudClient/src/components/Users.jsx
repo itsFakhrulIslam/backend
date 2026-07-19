@@ -54,7 +54,6 @@ const Users = ({ userPromise }) => {
         console.log("after deleted users", data);
 
         if (data.deletedCount) {
-          alert("user deleted successful");
 
           const reminingUsers = users.filter((user) => user._id !== itemId);
 
