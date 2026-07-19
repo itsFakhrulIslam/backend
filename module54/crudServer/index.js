@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 const dns = require("node:dns").promises;
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
@@ -80,6 +80,24 @@ async function run() {
       const getProducts = productsCollection.find();
       const productArr = await getProducts.toArray();
       res.send(productArr);
+    });
+
+    // data delete area
+    //for users
+    app.delete("/users/:id", async (req, res) => {
+      console.log("users deleted");
+
+      console.log(req.params.id);
+
+      const userDeleteId = req.params.id;
+
+      const query = {
+        _id: new ObjectId(userDeleteId),
+      };
+
+      const deleteResult = await testUserCollection.deleteOne(query);
+
+      res.send(deleteResult);
     });
 
     await client.db("admin").command({ ping: 1 });
