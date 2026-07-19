@@ -6,7 +6,7 @@ const Products = ({ productPromise }) => {
 
   const [products, setProducts] = useState(productsData);
 
-  const setAnewProducts = (newProduct) => {
+  const setAnewProducts = (newProduct, event) => {
     console.log("inital log");
 
     fetch("http://localhost:2030/products", {
@@ -31,6 +31,8 @@ const Products = ({ productPromise }) => {
 
           alert("product added successfull");
           console.log("after save product item", data);
+
+          event.target.reset()
         }
       });
 
@@ -52,7 +54,7 @@ const Products = ({ productPromise }) => {
       brand,
     };
 
-    setAnewProducts(newProduct);
+    setAnewProducts(newProduct, event);
     console.log("befor fetch");
   };
 
