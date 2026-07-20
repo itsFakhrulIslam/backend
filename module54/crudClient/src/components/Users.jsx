@@ -1,4 +1,5 @@
 import { use, useState } from "react";
+import { Link } from "react-router";
 
 const Users = ({ userPromise }) => {
   // data get area
@@ -54,7 +55,6 @@ const Users = ({ userPromise }) => {
         console.log("after deleted users", data);
 
         if (data.deletedCount) {
-
           const reminingUsers = users.filter((user) => user._id !== itemId);
 
           setUsers(reminingUsers);
@@ -79,6 +79,12 @@ const Users = ({ userPromise }) => {
         {users.map((user) => (
           <p key={user._id}>
             {user.name}
+            <button>
+              <Link to={`/users/${user._id}`}>Details</Link>
+            </button>
+            <button>
+              <Link to={`update/${user._id}`}>Edit</Link>
+            </button>
             <button onClick={() => handleDelete(user._id)}>x</button>
           </p>
         ))}
