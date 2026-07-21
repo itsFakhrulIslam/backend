@@ -1,5 +1,6 @@
 import "./App.css";
 import Products from "./components/Products";
+import Testing from "./components/Testing";
 import Users from "./components/Users";
 
 // data loader area
@@ -18,6 +19,8 @@ function App() {
       <Users userPromise={userPromise} />
 
       <Products productPromise={productPromise} />
+
+      <Testing />
     </>
   );
 }
