@@ -4,6 +4,10 @@ const cors = require("cors");
 const applicatioin = express();
 const port = process.env.PORT || 2040;
 
+// middleware
+applicatioin.use(cors());
+applicatioin.use(express.json());
+
 applicatioin.get("/", (req, res) => {
   res.send("hello smart developers");
 });
