@@ -95,6 +95,19 @@ async function run() {
       res.send(productArr);
     });
 
+    // dynamically user find
+    app.get("/products/:id", async (req, res) => {
+      console.log("product id hitted", req.params.id);
+
+      const productDetailId = req.params.id;
+
+      const query = { _id: new ObjectId(productDetailId) };
+
+      const detailResult = await productsCollection.findOne(query);
+
+      res.send(detailResult);
+    });
+
     // data delete area
     //for users
     app.delete("/users/:id", async (req, res) => {
